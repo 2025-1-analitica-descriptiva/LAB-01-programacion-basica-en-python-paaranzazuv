@@ -5,12 +5,14 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
+import csv
 
 def pregunta_01():
-    """
-    Retorne la suma de la segunda columna.
+    suma = 0
+    with open('files/input/data.csv', newline='') as f:
+        reader = csv.reader(f, delimiter='\t')
+        for row in reader:
+            suma += int(row[1])
+    return suma
 
-    Rta/
-    214
-
-    """
+print(pregunta_01())

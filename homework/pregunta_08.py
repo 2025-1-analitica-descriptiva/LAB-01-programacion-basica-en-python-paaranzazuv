@@ -4,10 +4,24 @@ datos requeridos se encuentran en el archivo data.csv. En este laboratorio
 solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
-
+import csv
 
 def pregunta_08():
-    """
+    valores = {}
+    with open('files/input/data.csv', newline='') as f:
+        reader = csv.reader(f, delimiter='\t')
+        for row in reader:
+            valor = int(row[1])
+            letra = row[0]
+            if valor not in valores:
+                valores[valor] = set()
+            valores[valor].add(letra)
+    resultado = [(valor, sorted(list(letras))) for valor, letras in sorted(valores.items())]
+    return resultado
+
+print(pregunta_08())
+
+"""
     Genere una lista de tuplas, donde el primer elemento de cada tupla
     contiene  el valor de la segunda columna; la segunda parte de la tupla
     es una lista con las letras (ordenadas y sin repetir letra) de la

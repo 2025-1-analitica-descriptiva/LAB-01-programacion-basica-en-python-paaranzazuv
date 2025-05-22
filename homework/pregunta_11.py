@@ -5,14 +5,26 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
+import csv
 
 def pregunta_11():
-    """
+    suma_letras = {}
+    with open('files/input/data.csv', newline='') as f:
+        reader = csv.reader(f, delimiter='\t')
+        for row in reader:
+            numero = int(row[1])
+            letras = row[3].split(',')
+            for letra in letras:
+                letra = letra.strip()
+                suma_letras[letra] = suma_letras.get(letra, 0) + numero
+    return dict(sorted(suma_letras.items()))
+
+print(pregunta_11())
+
+"""
     Retorne un diccionario que contengan la suma de la columna 2 para cada
     letra de la columna 4, ordenadas alfabeticamente.
 
     Rta/
     {'a': 122, 'b': 49, 'c': 91, 'd': 73, 'e': 86, 'f': 134, 'g': 35}
-
-
     """
